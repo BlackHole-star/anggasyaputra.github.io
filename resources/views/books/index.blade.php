@@ -23,11 +23,11 @@
                 <td>{{ $book->author }}</td>
                 <td>{{ $book->price }}</td>
                 <td>
-                    <a class="btn btn-warning btn-sm" href="{{ route('books.edit', ['isbn' => $book->isbn]) }}">Edit</a>
+                    <a class="btn btn-warning btn-sm" href="{{ route('books.edit', ['isbn' => $book->isbn]) }}"><span class="fas fa-edit"></span> Edit</a>
                     <form method="POST" action="{{ url('/books' . '/' . $book->isbn) }}" accept-charset="UTF-8" style="display:inline">
                         {{ method_field('DELETE') }}
                         {{ csrf_field() }}
-                        <button type="submit" class="btn btn-danger btn-sm" title="Delete Book" onclick="return confirm(&quot;Confirm delete?&quot;)"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
+                        <button type="submit" class="btn btn-danger btn-sm" title="Delete Book" onclick="return confirm(&quot;Confirm delete?&quot;)"><span class="fas fa-trash" aria-hidden="true"></span> Delete</button>
                     </form>
                 </td>
             </tr>

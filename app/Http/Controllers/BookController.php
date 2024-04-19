@@ -7,6 +7,26 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Models\Book;
 use Illuminate\View\View;
+use Illuminate\Foundation\Http\FormRequest;
+
+class StoreBookRequest extends FormRequest
+{
+    public function rules()
+    {
+        return [
+            'isbn' => [
+                'required',
+                'string',
+                'regex:/^[0-9\-]*$/',
+                'min:13',
+            ],
+            'title' => 'required|string',
+            'category' => 'required|string',
+            'author' => 'required|string',
+            'price' => 'required|numeric',
+        ];
+    }
+}
 
 class BookController extends Controller
 {
@@ -24,7 +44,7 @@ class BookController extends Controller
     }
 
   
-    public function store(Request $request): RedirectResponse
+    public function store(StoreBookRequest $request)
     {
         $input = $request->all();
         Book::create($input);
@@ -44,7 +64,7 @@ class BookController extends Controller
     }
 
 
-    public function update(Request $request, string $isbn): RedirectResponse
+    public function update(StoreBookRequest $request, string $isbn): RedirectResponse
     {
         $book = Book::find($isbn);
         $input = $request->all();
